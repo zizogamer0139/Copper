@@ -18,7 +18,7 @@ public class CopperClient implements ClientModInitializer {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (minecraft.screen instanceof TitleScreen) {
-            graphics.drawString(
+            graphics.text(
                     minecraft.font,
                     "Copper " + VERSION,
                     5,

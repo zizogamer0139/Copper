@@ -21,11 +21,15 @@ repositories {
 
 dependencies {
     // Minecraft itself
-    implementation files("libs/minecraft-${minecraft_version}.jar")
+    implementation files(
+        "libs/minecraft-client-${minecraft_version}.jar",
+        "libs/minecraft-common-${minecraft_version}.jar"
+    )
 
     // Copper loader / bytecode tooling
     implementation 'org.ow2.asm:asm:9.8'
     implementation 'org.ow2.asm:asm-tree:9.8'
+    implementation "org.slf4j:slf4j-api:2.0.17"
 }
 
 java {
@@ -49,7 +53,7 @@ publishing {
             pom {
                 name = 'Copper API'
                 description = 'The official API for the Copper mod loader'
-                url = 'https://github.com/YOUR_USERNAME/YOUR_REPOSITORY'
+                url = 'https://github.com/zizogamer0139/Copper.git'
 
                 licenses {
                     license {
