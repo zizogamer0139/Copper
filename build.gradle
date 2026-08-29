@@ -1,0 +1,70 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'net.copper'
+version = '26.2.0'
+
+ext {
+    minecraft_version = '26.2'
+}
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name = 'Mojang'
+        url = uri('https://libraries.minecraft.net')
+    }
+}
+
+dependencies {
+    // Minecraft itself
+    implementation files("libs/minecraft-${minecraft_version}.jar")
+
+    // Copper loader / bytecode tooling
+    implementation 'org.ow2.asm:asm:9.8'
+    implementation 'org.ow2.asm:asm-tree:9.8'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            pom {
+                name = 'Copper API'
+                description = 'The official API for the Copper mod loader'
+                url = 'https://github.com/YOUR_USERNAME/YOUR_REPOSITORY'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/license/mit'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'zizo'
+                        name = 'Zizo'
+                    }
+                }
+            }
+        }
+    }
+}
