@@ -1,24 +1,46 @@
-# 🟠 Copper
+# Copper
 
-**Copper** is a Minecraft mod loader built from the ground up.
+<p align="center">
+  <img src="download__4_-removebg-preview (1).png" alt="Copper Logo" width="180">
+</p>
 
-Copper is designed to provide its own mod-loading system and API without requiring Fabric, Forge, or another existing mod loader.
+<h1 align="center">Copper</h1>
+
+<p align="center">
+  <strong>A Minecraft mod loader built from scratch.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Minecraft-26.2-orange" alt="Minecraft 26.2">
+  <img src="https://img.shields.io/badge/Java-21-red" alt="Java 21">
+  <img src="https://img.shields.io/badge/Status-Early%20Development-yellow" alt="Early Development">
+</p>
+
+---
+
+## 🟠 What is Copper?
+
+**Copper** is an independent Minecraft mod loader being developed from the ground up.
+
+Copper is designed to have its **own mod-loading system, API, and tooling** instead of being built on top of Fabric or Forge.
+
+The goal is to create a simple, powerful, and extensible platform for Minecraft mods.
 
 ## ✨ Features
 
-* 🟠 **Standalone mod loader**
-* 🧩 **Copper-native mods**
-* ⚙️ Dedicated Copper API
-* 🎮 Minecraft integration
-* 📦 Mod discovery and loading
-* 🛠️ Developer-friendly API
-* 🚀 Designed to support future Minecraft versions
+* 🟠 Standalone mod-loader architecture
+* 🧩 Copper-native mods
+* 📦 Dedicated Copper API
+* 💻 Client and server support
+* 🔌 Mod discovery and loading
+* ⚙️ Developer-focused tooling
+* 🚀 Designed with future Minecraft versions in mind
 
 ## 📚 Copper API
 
-Copper mods use Copper's own APIs rather than Fabric APIs.
+Copper provides its own initialization interfaces.
 
-Example:
+### Common initialization
 
 ```java
 package net.example.mymod;
@@ -34,7 +56,7 @@ public class MyMod implements ModInitializer {
 }
 ```
 
-For client-specific initialization:
+### Client initialization
 
 ```java
 package net.example.mymod;
@@ -50,71 +72,102 @@ public class MyClientMod implements ClientModInitializer {
 }
 ```
 
-## 🏗️ Project Structure
+## 🏗️ Architecture
+
+Copper is intended to be independent from existing Minecraft mod loaders.
 
 ```text
-Copper/
-├── src/
-│   └── main/
-│       └── java/
-│           └── net/
-│               └── copper/
-├── gradle/
-├── build.gradle
-├── gradlew
-├── gradlew.bat
-└── README.md
+                    Minecraft
+                       │
+                       ▼
+                  ┌─────────┐
+                  │ Copper  │
+                  │ Loader  │
+                  └────┬────┘
+                       │
+             ┌─────────┼─────────┐
+             ▼         ▼         ▼
+          Copper    Copper     Copper
+           Mods      API       Tools
 ```
 
-## 🎯 Project Goals
+## 🛠️ Development
 
-Copper aims to provide:
+Copper is currently under active development.
 
-* A simple mod-loading system
-* A dedicated Copper API
-* Client and server mod support
-* A reliable mod discovery system
-* A clean developer experience
-* A loader architecture independent of Fabric and Forge
+The project is being built incrementally, starting with the core loader and API before expanding into additional loader features.
 
-## 🧪 Status
+### Building
 
-> **Copper is currently in early development.**
-
-The loader and API are actively being developed, so APIs and internal systems may change.
-
-## 🛠️ Building Copper
-
-Clone the repository and enter the project directory:
+Clone the repository:
 
 ```bash
 git clone https://github.com/zizogamer0139/Copper.git
 cd Copper
 ```
 
-Build the project:
-
-### Windows
+Build Copper:
 
 ```bash
 gradlew build
 ```
 
-### Linux / macOS
+On Linux or macOS:
 
 ```bash
 ./gradlew build
 ```
 
-The compiled artifacts will be located in:
+Build artifacts will be generated in:
 
 ```text
 build/libs/
 ```
 
+## 📁 Project Structure
+
+```text
+Copper/
+├── gradle/
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── net/
+│       │       └── copper/
+│       └── resources/
+├── build.gradle
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+├── LICENSE
+└── README.md
+```
+
+## 🎯 Roadmap
+
+* [x] Create Copper project
+* [x] Establish `net.copper` package
+* [x] Create Copper API
+* [x] Create client/server initializer APIs
+* [ ] Copper mod discovery
+* [ ] Copper mod metadata
+* [ ] Copper mod loading
+* [ ] Client mod support
+* [ ] Server mod support
+* [ ] Copper Mods menu
+* [ ] Copper configuration system
+* [ ] Copper installer
+* [ ] Multi-version support
+
+## 🧪 Current Status
+
+> **Copper is experimental software and is currently in early development.**
+
+The API, loader architecture, and project structure may change as development continues.
+
 ## 📜 License
 
-Copper uses the license included in the [`LICENSE`](LICENSE) file.
+See the [`LICENSE`](LICENSE) file for the terms governing use and distribution of Copper.
 
 ## 🟠 Copper
 
