@@ -12,7 +12,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Minecraft-26.2-orange" alt="Minecraft 26.2">
-  <img src="https://img.shields.io/badge/Java-25-red" alt="Java 25">
+  <img src="https://img.shields.io/badge/Java-25-blue" alt="Java 25">
   <img src="https://img.shields.io/badge/Status-Early%20Development-yellow" alt="Early Development">
 </p>
 
