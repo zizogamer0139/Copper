@@ -48,21 +48,9 @@ jobs:
         with:
           path: build/repo
 
-  deploy:
-    name: Deploy Maven Repository
-    needs: build
-    runs-on: ubuntu-latest
-
-    permissions:
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
       - name: Create repository index
         run: |
+          mkdir -p build/repo
           cat > build/repo/index.html <<'EOF'
           <!DOCTYPE html>
           <html>
