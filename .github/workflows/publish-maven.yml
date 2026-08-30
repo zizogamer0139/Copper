@@ -1,0 +1,52 @@
+name: Publish Copper Maven Repository
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build Maven Repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Copper
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Publish Copper API
+        run: ./gradlew publish
+
+      - name: Upload Maven Repository
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/repo
+
+  deploy:
+    name: Deploy Maven Repository
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
