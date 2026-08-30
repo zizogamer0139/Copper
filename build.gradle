@@ -22,6 +22,10 @@ repositories {
         name = 'Sponge'
         url = uri('https://repo.spongepowered.org/repository/maven-public/')
     }
+
+    maven {
+        url = "https://zizogamer0139.github.io/Copper"
+    }
 }
 
 dependencies {
@@ -78,6 +82,7 @@ dependencies {
     runtimeOnly "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-windows"
     runtimeOnly "org.lwjgl:lwjgl-tinyfd:$lwjglVersion:natives-windows"
     runtimeOnly "org.lwjgl:lwjgl-vma:$lwjglVersion:natives-windows"
+
 }
 
 configurations.configureEach {
@@ -141,12 +146,6 @@ tasks.register('runClient', JavaExec) {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "localCopperRepo"
-            url = uri("$buildDir/repo")
-        }
-    }
     publications {
         copperApi(MavenPublication) {
             from components.java
@@ -176,4 +175,13 @@ publishing {
             }
         }
     }
+
+    repositories {
+        maven {
+            name = "localRepo"
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
+
+
 }

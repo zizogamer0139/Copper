@@ -1,0 +1,133 @@
+---- Minecraft Crash Report ----
+// You're mean.
+
+Time: 2026-08-29 12:30:00
+Description: Unexpected error
+
+java.lang.UnsatisfiedLinkError: 'void org.lwjgl.opengl.GL32C.glDeleteSync(long)'
+	at org.lwjgl.opengl.GL32C.glDeleteSync(Native Method)
+	at com.mojang.blaze3d.opengl.GlCommandEncoder.awaitSubmit(GlCommandEncoder.java:128)
+	at com.mojang.blaze3d.opengl.GlFence.awaitCompletion(GlFence.java:28)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool$PendingRecycle.tryRecycle(StagedVertexBuffer.java:318)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool.lambda$tryRecycleBuffers$0(StagedVertexBuffer.java:252)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1763)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1751)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool.tryRecycleBuffers(StagedVertexBuffer.java:251)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool.acquire(StagedVertexBuffer.java:262)
+	at net.minecraft.client.renderer.StagedVertexBuffer.upload(StagedVertexBuffer.java:129)
+	at net.minecraft.client.gui.render.GuiRenderer.render(GuiRenderer.java:143)
+	at net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:450)
+	at net.minecraft.client.Minecraft.renderFrame(Minecraft.java:1374)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1269)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:959)
+	at net.minecraft.client.main.Main.main(Main.java:292)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at org.lwjgl.opengl.GL32C.glDeleteSync(Native Method)
+	at com.mojang.blaze3d.opengl.GlCommandEncoder.awaitSubmit(GlCommandEncoder.java:128)
+	at com.mojang.blaze3d.opengl.GlFence.awaitCompletion(GlFence.java:28)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool$PendingRecycle.tryRecycle(StagedVertexBuffer.java:318)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool.lambda$tryRecycleBuffers$0(StagedVertexBuffer.java:252)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1763)
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1751)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool.tryRecycleBuffers(StagedVertexBuffer.java:251)
+	at net.minecraft.client.renderer.StagedVertexBuffer$GpuBufferPool.acquire(StagedVertexBuffer.java:262)
+	at net.minecraft.client.renderer.StagedVertexBuffer.upload(StagedVertexBuffer.java:129)
+	at net.minecraft.client.gui.render.GuiRenderer.render(GuiRenderer.java:143)
+	at net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:450)
+
+-- Uptime --
+Details:
+	JVM uptime: 19.643s
+	Wall uptime: 4.638s
+	High-res time: 3.971s
+	Client ticks: 16 ticks / 0.800s
+Stacktrace:
+	at net.minecraft.client.Minecraft.fillReport(Minecraft.java:2496)
+	at net.minecraft.client.Minecraft.emergencySaveAndCrash(Minecraft.java:1008)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:983)
+	at net.minecraft.client.main.Main.main(Main.java:292)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: No
+	Packs: vanilla
+
+-- System Details --
+Details:
+	Minecraft Version: 26.2
+	Minecraft Version ID: 26.2
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 25.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 234041248 bytes (223 MiB) / 461373440 bytes (440 MiB) up to 2147483648 bytes (2048 MiB)
+	Memory (heap): init: 124MiB, used: 215MiB, committed: 440MiB, max: 2048MiB
+	Memory (non-head): init: 007MiB, used: 121MiB, committed: 124MiB, max: 000MiB
+	CPUs: 4
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i3-1005G1 CPU @ 1.20GHz
+	Identifier: Intel64 Family 6 Model 126 Stepping 5
+	Microarchitecture: Ice Lake (Client)
+	Frequency (GHz): 1.19
+	Number of physical packages: 1
+	Number of physical CPUs: 2
+	Number of logical CPUs: 4
+	Graphics card #0 name: Intel(R) UHD Graphics
+	Graphics card #0 vendor: Intel Corporation
+	Graphics card #0 VRAM (MiB): 1024.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 31.0.101.2141
+	Memory slot #0 capacity (MiB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 3.20
+	Memory slot #0 type: DDR4
+	Virtual memory max (MiB): 17607.91
+	Virtual memory used (MiB): 13824.41
+	Swap memory total (MiB): 9728.00
+	Swap memory used (MiB): 1655.67
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 82301.84, total: 243978.00
+	Space in storage for workdir (MiB): available: 82301.84, total: 243978.00
+	Operating System Version: Microsoft Windows 11 (Home) build 26200
+	Process Elevated: false
+	Process Loads: Uptime: 19s, user: 35s (188.84%), kernel: 6s (29.74%), total: 41s (218.58%)
+	Process Virtual Size (MiB): 227.36
+	Process Resident Size (MiB): 735.72
+	JVM Flags: 1 total; -Xmx2G
+	Debug Flags: 0 total; 
+	Launched Version: Copper
+	Backend library: LWJGL version 3.4.1+2
+	Window size: 854x480
+	Surface Info: acquired, FIFO, 854 x 480
+	GFLW Platform: win32
+	Graphics Device: Intel(R) UHD Graphics
+	Graphics Backend: OpenGL
+	Graphics Vendor: Intel
+	Graphics Drivers: 3.3.0 - Build 31.0.101.2141
+	Graphics Device Extensions: GL_ARB_multi_draw_indirect, GL_ARB_buffer_storage, GL_ARB_shader_draw_parameters, GL_ARB_base_instance, GL_KHR_debug, GL_ARB_draw_indirect, GL_ARB_clip_control, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+	Graphics Device Type: INTEGRATED
+	Graphics Device Features: DeviceFeatures[shaderDrawParameters=true, multiDrawDirectInterleaved=false, multiDrawDirectSeparate=true, multiDrawIndirect=true, drawIndirect=true, nonZeroFirstInstance=true, persistentMapping=true]
+	GL debug messages: 
+	Is Modded: Probably not. Client jar signature and brand is untouched
+	Universe: 400921fb54442d18
+	Type: Client
+	Transparency: regular
+	Render Distance: 16/16 chunks
+	Narrator config: OFF
+	Narrator status: true
+	Resource Packs: vanilla
+	Sound Cache: 0 bytes in 0 buffers
+	Current Language: en_us
+	Locale: en_US
+	System encoding: Cp1252
+	File encoding: UTF-8
+	CPU: 4x Intel(R) Core(TM) i3-1005G1 CPU @ 1.20GHz

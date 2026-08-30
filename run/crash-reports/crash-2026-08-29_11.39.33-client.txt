@@ -1,0 +1,198 @@
+---- Minecraft Crash Report ----
+// Why did you do that?
+
+Time: 2026-08-29 11:39:33
+Description: Loading library LWJGL system
+
+java.lang.UnsatisfiedLinkError: Failed to locate library: lwjgl.dll
+	at org.lwjgl.system.Library.loadSystem(Library.java:177)
+	at org.lwjgl.system.Library.loadSystem(Library.java:67)
+	at org.lwjgl.system.Library.<clinit>(Library.java:55)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLWJGLSystem(NativeLibrariesBootstrap.java:280)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibrary(NativeLibrariesBootstrap.java:201)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibraries(NativeLibrariesBootstrap.java:83)
+	at net.minecraft.client.main.Main.main(Main.java:142)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at org.lwjgl.system.Library.loadSystem(Library.java:177)
+	at org.lwjgl.system.Library.loadSystem(Library.java:67)
+	at org.lwjgl.system.Library.<clinit>(Library.java:55)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLWJGLSystem(NativeLibrariesBootstrap.java:280)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibrary(NativeLibrariesBootstrap.java:201)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibraries(NativeLibrariesBootstrap.java:83)
+
+-- Library directory contents --
+Details:
+	Contents of java.library.path : <not a directory>
+	Contents of org.lwjgl.librarypath: <not set>
+	LWJGL platform: WINDOWS
+	LWJGL architecture: X64
+Stacktrace:
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibrary(NativeLibrariesBootstrap.java:201)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibraries(NativeLibrariesBootstrap.java:83)
+	at net.minecraft.client.main.Main.main(Main.java:142)
+
+-- LWJGL debug log --
+Details:
+	Log: [LWJGL] Failed to load a library. Possible solutions:
+	a) Add the directory that contains the shared library to -Djava.library.path or -Dorg.lwjgl.librarypath.
+	b) Add the JAR that contains the shared library to the classpath.
+[LWJGL] Enable debug mode with -Dorg.lwjgl.util.Debug=true for better diagnostics.
+
+Stacktrace:
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibrary(NativeLibrariesBootstrap.java:201)
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibraries(NativeLibrariesBootstrap.java:83)
+	at net.minecraft.client.main.Main.main(Main.java:142)
+
+-- Libraries loaded --
+Details:
+	Loading order: 
+	Loading index: -1
+Stacktrace:
+	at com.mojang.blaze3d.platform.NativeLibrariesBootstrap.loadLibraries(NativeLibrariesBootstrap.java:83)
+	at net.minecraft.client.main.Main.main(Main.java:142)
+
+-- Initialization --
+Details:
+	Modules: 
+		ADVAPI32.dll:Advanced Windows 32 Base API:10.0.26100.3624 (WinBuild.160101.0800):Microsoft Corporation
+		COMCTL32.dll:User Experience Controls Library:6.10 (WinBuild.160101.0800):Microsoft Corporation
+		CRYPT32.dll:Crypto API32:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		CRYPTBASE.dll:Base cryptographic API DLL:10.0.26100.8875 (WinBuild.160101.0800):Microsoft Corporation
+		CRYPTSP.dll:Cryptographic Service Provider API:10.0.26100.8875 (WinBuild.160101.0800):Microsoft Corporation
+		DBGHELP.DLL:Windows Image Helper:10.0.26100.8328 (WinBuild.160101.0800):Microsoft Corporation
+		DNSAPI.dll:DNS Client API DLL:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		DSPARSE.dll:Active Directory Domain Services API:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		GDI32.dll:GDI Client DLL:10.0.26100.8328 (WinBuild.160101.0800):Microsoft Corporation
+		IMM32.DLL:Multi-User Windows IMM32 API Client DLL:10.0.26100.8521 (WinBuild.160101.0800):Microsoft Corporation
+		IPHLPAPI.DLL:IP Helper API:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		KERNEL32.DLL:Windows NT BASE API Client DLL:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		KERNELBASE.dll:Windows NT BASE API Client DLL:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		MpOav.dll:IOfficeAntiVirus Module:4.18.26080.3 (9e1f3147fbc83f18a98a965394a23e07747d7295):Microsoft Corporation
+		NSI.dll:NSI User-mode interface DLL:10.0.26100.8875 (WinBuild.160101.0800):Microsoft Corporation
+		OLEAUT32.dll:OLEAUT32.DLL:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		POWRPROF.dll:Power Profile Helper DLL:10.0.26100.8117 (WinBuild.160101.0800):Microsoft Corporation
+		PSAPI.DLL:Process Status Helper:10.0.26100.8521 (WinBuild.160101.0800):Microsoft Corporation
+		Pdh.dll:Windows Performance Data Helper DLL:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		RPCRT4.dll:Remote Procedure Call Runtime:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		SHCORE.dll:SHCORE:10.0.26100.8117 (WinBuild.160101.0800):Microsoft Corporation
+		SHELL32.dll:Windows Shell Common Dll:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		SspiCli.dll:Security Support Provider Interface:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		UMPDC.dll:User Mode Power Dependency Coordinator:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		USER32.dll:Multi-User Windows USER API Client DLL:10.0.26100.8117 (WinBuild.160101.0800):Microsoft Corporation
+		USERENV.dll:Userenv:10.0.26100.7920 (WinBuild.160101.0800):Microsoft Corporation
+		VCRUNTIME140.dll:Microsoft® C Runtime Library:14.40.33810.0:Microsoft Corporation
+		VERSION.dll:Version Checking and File Installation Libraries:10.0.26100.1150 (WinBuild.160101.0800):Microsoft Corporation
+		WINMM.dll:MCI API DLL:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		WINSTA.dll:Winstation Library:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		WS2_32.dll:Windows Socket 2.0 32-Bit DLL:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		Wtsapi32.dll:Windows Remote Desktop Session Host Server SDK APIs:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		amsi.dll:Anti-Malware Scan Interface:10.0.26100.7309 (WinBuild.160101.0800):Microsoft Corporation
+		bcrypt.dll:Windows Cryptographic Primitives Library:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		bcryptPrimitives.dll:Windows Cryptographic Primitives Library:10.0.26100.9168 (WinBuild.160101.0800):Microsoft Corporation
+		clbcatq.dll:COM+ Configuration Catalog:2001.12.10941.16384 (WinBuild.160101.0800):Microsoft Corporation
+		combase.dll:Microsoft COM for Windows:10.0.26100.7705 (WinBuild.160101.0800):Microsoft Corporation
+		dbgcore.DLL:Windows Core Debugging Helpers:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		fwpuclnt.dll:FWP/IPsec User-Mode API:10.0.26100.3915 (WinBuild.160101.0800):Microsoft Corporation
+		gdi32full.dll:GDI Client DLL:10.0.26100.9168 (WinBuild.160101.0800):Microsoft Corporation
+		java.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		java.exe:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		jimage.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		jli.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		jna16936023459236978534.dll:JNA native library:7.0.2:Java(TM) Native Access (JNA)
+		jvm.dll:OpenJDK 64-Bit server VM:25.0.4.0:Eclipse Adoptium
+		kernel.appcore.dll:AppModel API Host:10.0.26100.8737 (WinBuild.160101.0800):Microsoft Corporation
+		management.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		management_ext.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		msvcp140.dll:Microsoft® C Runtime Library:14.40.33810.0:Microsoft Corporation
+		msvcp_win.dll:Microsoft® C Runtime Library:10.0.26100.8875 (WinBuild.160101.0800):Microsoft Corporation
+		msvcrt.dll:Windows NT CRT DLL:7.0.26100.8875 (WinBuild.160101.0800):Microsoft Corporation
+		mswsock.dll:Microsoft Windows Sockets 2.0 Service Provider:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		napinsp.dll:E-mail Naming Shim Provider:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		net.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		nio.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		nlansp_c.dll:NLA Namespace Service Provider DLL:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		ntdll.dll:NT Layer DLL:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		ole32.dll:Microsoft OLE for Windows:10.0.26100.6725 (WinBuild.160101.0800):Microsoft Corporation
+		perfos.dll:Windows System Performance Objects DLL:10.0.26100.7705 (WinBuild.160101.0800):Microsoft Corporation
+		perfproc.dll:Windows System Process Performance Objects DLL:10.0.26100.7705 (WinBuild.160101.0800):Microsoft Corporation
+		pfclient.dll:SysMain Client:10.0.26100.4202 (WinBuild.160101.0800):Microsoft Corporation
+		profapi.dll:User Profile Basic API:10.0.26100.9168 (WinBuild.160101.0800):Microsoft Corporation
+		rasadhlp.dll:Remote Access AutoDial Helper:10.0.26100.7920 (WinBuild.160101.0800):Microsoft Corporation
+		rsaenh.dll:Microsoft Enhanced Cryptographic Provider:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		sechost.dll:Host for SCM/SDDL/LSA Lookup APIs:10.0.26100.1 (WinBuild.160101.0800):Microsoft Corporation
+		shlwapi.dll:Shell Light-weight Utility Library:10.0.26100.8117 (WinBuild.160101.0800):Microsoft Corporation
+		ucrtbase.dll:Microsoft® C Runtime Library:10.0.26100.8875 (WinBuild.160101.0800):Microsoft Corporation
+		vcruntime140_1.dll:Microsoft® C Runtime Library:14.40.33810.0:Microsoft Corporation
+		verify.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+		win32u.dll:Win32u:10.0.26100.9168 (WinBuild.160101.0800):Microsoft Corporation
+		windows.storage.dll:Microsoft WinRT Storage API:10.0.26100.8972 (WinBuild.160101.0800):Microsoft Corporation
+		winrnr.dll:LDAP RnR Provider DLL:10.0.26100.8737 (WinBuild.160101.0800):Microsoft Corporation
+		wshbth.dll:Windows Sockets Helper DLL:10.0.26100.8875 (WinBuild.160101.0800):Microsoft Corporation
+		zip.dll:OpenJDK Platform binary:25.0.4.0:Eclipse Adoptium
+Stacktrace:
+	at net.minecraft.client.main.Main.main(Main.java:142)
+
+-- System Details --
+Details:
+	Minecraft Version: 26.2
+	Minecraft Version ID: 26.2
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 25.0.4, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 146385088 bytes (139 MiB) / 241172480 bytes (230 MiB) up to 2147483648 bytes (2048 MiB)
+	Memory (heap): init: 124MiB, used: 089MiB, committed: 230MiB, max: 2048MiB
+	Memory (non-head): init: 007MiB, used: 021MiB, committed: 024MiB, max: 000MiB
+	CPUs: 4
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i3-1005G1 CPU @ 1.20GHz
+	Identifier: Intel64 Family 6 Model 126 Stepping 5
+	Microarchitecture: Ice Lake (Client)
+	Frequency (GHz): 1.19
+	Number of physical packages: 1
+	Number of physical CPUs: 2
+	Number of logical CPUs: 4
+	Graphics card #0 name: Intel(R) UHD Graphics
+	Graphics card #0 vendor: Intel Corporation
+	Graphics card #0 VRAM (MiB): 1024.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 31.0.101.2141
+	Memory slot #0 capacity (MiB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 3.20
+	Memory slot #0 type: DDR4
+	Virtual memory max (MiB): 17607.91
+	Virtual memory used (MiB): 12107.82
+	Swap memory total (MiB): 9728.00
+	Swap memory used (MiB): 1196.55
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 82375.91, total: 243978.00
+	Space in storage for workdir (MiB): available: 82375.91, total: 243978.00
+	Operating System Version: Microsoft Windows 11 (Home) build 26200
+	Process Elevated: false
+	Process Loads: Uptime: 4s, user: 7s (170.64%), kernel: 1s (31.75%), total: 8s (202.39%)
+	Process Virtual Size (MiB): 3846.90
+	Process Resident Size (MiB): 255.49
+	JVM Flags: 1 total; -Xmx2G
+	Debug Flags: 0 total; 
+	Launched Version: Copper
+	Backend library: LWJGL version 3.4.1+2
+	Window size: <not initialized>
+	Surface Info: <no surface>
+	GFLW Platform: null
+	Graphics Device: <none>
+	GL debug messages: <no renderer available>
+	Is Modded: Probably not. Client jar signature and brand is untouched
+	Universe: 404
+	Type: Client
+	Locale: en_US
+	System encoding: Cp1252
+	File encoding: UTF-8
+	CPU: 4x Intel(R) Core(TM) i3-1005G1 CPU @ 1.20GHz
