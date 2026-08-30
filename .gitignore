@@ -2,6 +2,7 @@
 build/
 out/
 libs/
+src/
 *.class
 
 # IDE

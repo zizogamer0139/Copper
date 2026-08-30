@@ -17,19 +17,73 @@ repositories {
         name = 'Mojang'
         url = uri('https://libraries.minecraft.net')
     }
+
+    maven {
+        name = 'Sponge'
+        url = uri('https://repo.spongepowered.org/repository/maven-public/')
+    }
 }
 
 dependencies {
     // Minecraft itself
     implementation files(
-        "libs/minecraft-client-${minecraft_version}.jar",
-        "libs/minecraft-common-${minecraft_version}.jar"
+        "libs/minecraft-${minecraft_version}.jar"
     )
 
     // Copper loader / bytecode tooling
     implementation 'org.ow2.asm:asm:9.8'
     implementation 'org.ow2.asm:asm-tree:9.8'
-    implementation "org.slf4j:slf4j-api:2.0.17"
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    implementation 'org.spongepowered:mixin:0.8.7'
+    implementation 'net.sf.jopt-simple:jopt-simple:5.0.4'
+    implementation 'com.mojang:brigadier:1.3.10'
+    implementation 'io.netty:netty-common:4.1.121.Final'
+    implementation 'org.joml:joml:1.10.8'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'com.mojang:authlib:9.0.75'
+    implementation 'io.netty:netty-codec:4.1.121.Final'
+    implementation 'com.mojang:datafixerupper:10.0.21'
+    implementation 'com.mojang:logging:1.7.12'
+    implementation "com.google.code.gson:gson:2.13.2"
+    implementation "com.github.oshi:oshi-core:6.8.2"
+    implementation "net.java.dev.jna:jna:5.17.0"
+    implementation "net.java.dev.jna:jna-platform:5.17.0"
+    implementation 'org.lwjgl:lwjgl:3.4.1'
+    implementation 'org.lwjgl:lwjgl-freetype:3.4.1'
+    implementation 'org.lwjgl:lwjgl-glfw:3.4.1'
+    implementation 'org.lwjgl:lwjgl-jemalloc:3.4.1'
+    implementation 'org.lwjgl:lwjgl-openal:3.4.1'
+    implementation 'org.lwjgl:lwjgl-opengl:3.4.1'
+    implementation 'org.lwjgl:lwjgl-shaderc:3.4.1'
+    implementation 'org.lwjgl:lwjgl-spvc:3.4.1'
+    implementation 'org.lwjgl:lwjgl-stb:3.4.1'
+    implementation 'org.lwjgl:lwjgl-tinyfd:3.4.1'
+    implementation 'org.lwjgl:lwjgl-vma:3.4.1'
+    implementation 'org.lwjgl:lwjgl-vulkan:3.4.1'
+    implementation "com.mojang:jtracy:1.0.37"
+    implementation 'it.unimi.dsi:fastutil:8.5.18'
+    implementation 'com.ibm.icu:icu4j:76.1'
+    implementation 'com.mojang:text2speech:1.19.12'
+
+    def lwjglVersion = '3.4.1'
+
+    runtimeOnly "org.lwjgl:lwjgl:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-glfw:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-freetype:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-jemalloc:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-openal:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-opengl:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-shaderc:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-spvc:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-stb:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-tinyfd:$lwjglVersion:natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-vma:$lwjglVersion:natives-windows"
+}
+
+configurations.configureEach {
+    resolutionStrategy {
+        force 'it.unimi.dsi:fastutil:8.5.18'
+    }
 }
 
 java {
@@ -41,19 +95,70 @@ java {
     withJavadocJar()
 }
 
+jar {
+    manifest {
+        attributes(
+            'Premain-Class': 'net.copper.CopperAgent',
+            'Can-Redefine-Classes': 'true',
+            'Can-Retransform-Classes': 'true'
+        )
+    }
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
+tasks.register('runClient', JavaExec) {
+    group = 'minecraft'
+    description = 'Runs Minecraft with Copper.'
+
+    dependsOn tasks.jar
+
+    classpath = sourceSets.main.runtimeClasspath
+
+    mainClass = 'net.copper.CopperLauncher'
+
+    workingDir = file('run')
+
+    doFirst {
+        workingDir.mkdirs()
+
+        jvmArgs(
+            "-javaagent:${tasks.jar.archiveFile.get().asFile.absolutePath}",
+            '-Xmx2G',
+            "-Djava.library.path=${file('libs/natives').absolutePath}"
+        )
+    }
+
+    args(
+        '--version', 'Copper',
+        '--accessToken', '0',
+        '--username', 'Player',
+        '--gameDir', workingDir.absolutePath,
+        '--assetsDir', file('assets').absolutePath
+    )
+}
+
 publishing {
+    repositories {
+        maven {
+            name = "localCopperRepo"
+            url = uri("$buildDir/repo")
+        }
+    }
     publications {
-        mavenJava(MavenPublication) {
+        copperApi(MavenPublication) {
             from components.java
+
+            groupId = 'net.copper'
+            artifactId = 'copper-api'
+            version = project.version
 
             pom {
                 name = 'Copper API'
                 description = 'The official API for the Copper mod loader'
-                url = 'https://github.com/zizogamer0139/Copper.git'
+                url = 'https://github.com/zizogamer0139/Copper'
 
                 licenses {
                     license {
