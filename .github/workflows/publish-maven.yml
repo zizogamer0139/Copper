@@ -20,12 +20,6 @@ jobs:
       - name: Checkout Copper
         uses: actions/checkout@v4
 
-      - name: Make Gradle wrapper executable
-        run: |
-          chmod +x ./gradlew
-          ls -l ./gradlew
-          file ./gradlew
-
       - name: Set up JDK 25
         uses: actions/setup-java@v4
         with:
@@ -35,26 +29,29 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Verify Gradle wrapper
-        run: |
-          ls -l ./gradlew
-          ./gradlew --version
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
 
       - name: Publish Copper API
         run: ./gradlew publish
 
-      - name: Upload Maven Repository
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/repo
+      - name: Check Maven Repository
+        run: |
+          echo "=== Maven Repository Contents ==="
+          if [ -d "build/repo" ]; then
+            find build/repo -type f -print
+          else
+            echo "ERROR: build/repo does not exist!"
+            exit 1
+          fi
 
       - name: Create repository index
         run: |
-          mkdir -p build/repo
           cat > build/repo/index.html <<'EOF'
           <!DOCTYPE html>
           <html>
           <head>
+            <meta charset="UTF-8">
             <title>Copper Maven Repository</title>
           </head>
           <body>
@@ -63,3 +60,22 @@ jobs:
           </body>
           </html>
           EOF
+
+      - name: Upload Maven Repository
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/repo
+
+  deploy:
+    name: Deploy Maven Repository
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
