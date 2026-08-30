@@ -61,3 +61,17 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Create repository index
+        run: |
+          cat > build/repo/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Copper Maven Repository</title>
+          </head>
+          <body>
+            <h1>⚒️ Copper Maven Repository</h1>
+            <p>Official Maven repository for the Copper mod loader.</p>
+          </body>
+          </html>
+          EOF
